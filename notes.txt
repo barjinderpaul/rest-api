@@ -70,5 +70,5 @@ router.delete('/ninja/:id',(req,res,next)=>{
 })
 
 
-//Req parameters :
-//URL parameters ?
+//Req parameters : //accessed by req.params.id
+//URL parameters ? //accessed by req.query.parameter-name
