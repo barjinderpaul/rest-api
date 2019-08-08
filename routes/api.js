@@ -21,12 +21,21 @@ router.post('/ninjas',(req,res,next)=>{
 
 //update ninja with id = id;
 router.put('/ninjas/:id',(req,res,next)=>{
-    res.send({type:'PUT'});
+    Ninja.findByIdAndUpdate({_id:req.params.id},req.body).then(()=>{
+        Ninja.findOne({_id:req.params.id}).then((ninja)=>{
+            res.send(ninja);
+        });
+    });
+    // res.send({type:'PUT'});
 });
 
 //delete ninja from db;
 router.delete('/ninjas/:id',(req,res,next)=>{
-    res.send({type:'DELETE'});
+    // res.send(req.params.id);
+    Ninja.findByIdAndRemove({_id:req.params.id}).then((ninja)=>{
+        res.send(ninja);
+    })
+    // res.send({type:'DELETE'});
 });
 
 module.exports = router;

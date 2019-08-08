@@ -3,6 +3,17 @@ const Schema = mongoose.Schema;
 
 //creating ninja schema and model;
 
+const GeoSchema = new Schema({
+    type:{
+        type:String,
+        default:"Point"
+    },
+    coordinate:{
+        type:[Number],
+        index:"2dsphere"
+    }
+});
+
 const NinjaSchema = new Schema({
     name:{
         type:String,
@@ -15,7 +26,9 @@ const NinjaSchema = new Schema({
     available:{
         type:Boolean,
         default:false
-    }
+    },
+    geometry: GeoSchema
+
 });
 
 //collection,schema

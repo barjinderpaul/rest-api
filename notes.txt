@@ -50,3 +50,21 @@ var instance = req.body;
 ModelName.create(req.body).then((instance)=>{
     res.send(instance);
 })
+
+
+//Error handling:
+app.use((err,req,res,next)=>{
+    // console.log(err);
+    res.status(422).send({
+        error:err.message
+    });
+});
+
+
+//In REST (Representational State Transfer) API(Application Program Interface)
+router.delete('/ninja/:id',(req,res,next)=>{
+    //:id can be accessed by req.params.id;
+    Model.findByIdAndRemove({_id:req.params.id}).then((instance)=>{
+        res.send(instance);
+    })
+})
