@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const routes = require('./routes/api');
 
 const app = express();
@@ -16,7 +17,11 @@ app.get('/api',(req,res)=>{
 */
 
 //middleware
+//use middleware with app.use(); orders matter in using middlewares; bodyparse should always be the first;
+app.use(bodyParser.json());
 app.use('/api',routes); //routes will be used after /api;   
+
+//Body-Parser is sending back the posted data or pushing the data sent via POST in db in json;
 
 //listening to requests;
 const PORT = 3000;
