@@ -1,3 +1,17 @@
+HTTP Methods;    
+GET, POST, PUT, DELETE
+
+Requests;
+app.get('/api',(req,res)=>{
+    console.log("GET Request"); //Or simple use morgan module;
+    // res.end();  //Makes browser stops waiting for any response
+    // res.send("GET Request");
+    res.send({name:"localhost:3000"});  //sending back json
+});
+
+We use express.Router() to simply routes;
+
+
 Middleware: 
 Code to be executed after a http method and before sending a response;
 Order matters in middleware.
@@ -7,3 +21,32 @@ MondoDB:
 Models repesent collections in MondoDB;
 Collections are just like tables in SQL;
 Schema is the structure of our data objects;
+
+Mongoose:
+Adds a layer of methods to easily save,edit,retreive and delete data from mongoDB;
+Allows us to create our Models and Schemas easily
+
+Schema boiler plate:
+const mongoose = require('mongoose);
+const Schema = mongoose.Schema;
+
+const SchemaName = new Schema({
+    name:{
+        type:String,
+        required:[true,"Name field is required"]
+    }
+});
+
+const ModelName = mongoose.model('collection-name',SchemaName);
+//Collection will be saved as a plural name - collection-names
+module.exports = ModelName;
+
+//Conencting to db;
+mongoose.connect("mongodb://localhost/database-name);
+monngoose.Promise = globals.Promise;
+
+//Saving data from post to db;
+var instance = req.body;
+ModelName.create(req.body).then((instance)=>{
+    res.send(instance);
+})
